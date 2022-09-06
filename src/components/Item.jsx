@@ -6,6 +6,7 @@ const WrapItem = styled.div`
   padding: 0.8rem 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #89acbe;
 `;
 
@@ -33,15 +34,19 @@ const BtnDelete = styled.button`
   cursor: pointer;
 `;
 
-const Item = () => {
+const Item = ({ todoData, setTodoData, handleClick, newTodo }) => {
   return (
-    <WrapItem>
-      <ItemLabel style={getStyled()}>
-        <Checkbox type="checkbox" defaultChecked={false} />
-        삼겹살 사기
-      </ItemLabel>
-      <BtnDelete>X</BtnDelete>
-    </WrapItem>
+    <>
+      {todoData.map((item) => (
+        <WrapItem key={item.id}>
+          <ItemLabel style={getStyled()}>
+            <Checkbox type="checkbox" defaultChecked={false} />
+            {item.title}
+          </ItemLabel>
+          <BtnDelete onClick={() => handleClick(item.id)}>X</BtnDelete>
+        </WrapItem>
+      ))}
+    </>
   );
 };
 
