@@ -5,6 +5,8 @@ const WrapForm = styled.div`
   width: 100%;
   padding: 1rem 0;
   box-sizing: border-box;
+  border-bottom: 1px dashed #89acbe;
+  margin-bottom: 1rem;
 `;
 
 const Form = styled.form`

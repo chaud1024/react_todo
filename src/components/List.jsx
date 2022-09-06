@@ -12,18 +12,7 @@ const WrapList = styled.div`
 `;
 
 const List = () => {
-  const [todoData, setTodoData] = useState([
-    {
-      id: "1",
-      title: "삼겹살 사기",
-      completed: false,
-    },
-    {
-      id: "2",
-      title: "바닥 청소하기",
-      completed: false,
-    },
-  ]);
+  const [todoData, setTodoData] = useState([]);
 
   const [value, setValue] = useState("");
 
@@ -47,7 +36,6 @@ const List = () => {
 
     setTodoData((prev) => [...prev, newItem]);
     setValue("");
-    e.target.value = "";
   };
 
   return (
