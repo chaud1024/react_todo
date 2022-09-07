@@ -20,6 +20,7 @@ const List = React.memo(({ todoData, setTodoData, handleClick }) => {
           id={item.id}
           title={item.title}
           completed={item.completed}
+          key={item.id}
         />
       ))}
     </WrapList>

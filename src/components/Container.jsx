@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import styled from "@emotion/styled";
 import List from "./List";
 import Add from "./Add";
@@ -55,10 +55,18 @@ const Container = () => {
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
 
+  useEffect(() => {
+    const list = JSON.parse(localStorage.getItem("todoData"));
+    console.log(list);
+
+    setTodoData(list);
+  }, []);
+
   const handleClick = useCallback(
     (id) => {
       let newTodoData = todoData.filter((item) => item.id !== id);
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify(newTodoData));
     },
     [todoData]
   );
@@ -77,11 +85,13 @@ const Container = () => {
     };
 
     setTodoData((prev) => [...prev, newItem]);
+    localStorage.setItem("todoData", JSON.stringify([...todoData, newItem]));
     setValue("");
   };
 
   const handleAllDeleteClick = () => {
     setTodoData([]);
+    localStorage.setItem("todoData", JSON.stringify([]));
   };
 
   return (

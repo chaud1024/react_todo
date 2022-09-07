@@ -84,6 +84,7 @@ const Item = React.memo(
         return item;
       });
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify([newTodoData]));
     };
 
     const [isEditing, setIsEditing] = useState(false);
@@ -102,6 +103,7 @@ const Item = React.memo(
         return item;
       });
       setTodoData(newTodoData);
+      localStorage.setItem("todoData", JSON.stringify([newTodoData]));
       setIsEditing(false);
     };
 
