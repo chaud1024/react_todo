@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import styled from "@emotion/styled";
 import List from "./List";
+import Add from "./Add";
 
 const WrapContainer = styled.div`
   width: 80%;
@@ -20,15 +21,57 @@ const WrapTodo = styled.div`
 const Title = styled.h1`
   font-size: 2rem;
   color: #245572;
-  margin-bottom: 1rem;
+  padding: 1rem 0;
+  box-sizing: border-box;
+  border-bottom: 2px solid #245572;
 `;
 
 const Container = () => {
+  console.log("Container is rendering");
+
+  const [todoData, setTodoData] = useState([]);
+  const [value, setValue] = useState("");
+
+  const handleClick = useCallback(
+    (id) => {
+      let newTodoData = todoData.filter((item) => item.id !== id);
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    let newItem = {
+      id: Date.now(),
+      title: value,
+      completed: false,
+    };
+
+    setTodoData((prev) => [...prev, newItem]);
+    setValue("");
+  };
+
   return (
     <WrapContainer>
       <WrapTodo>
         <Title>오늘의 할 일</Title>
-        <List />
+        <Add
+          value={value}
+          setValue={setValue}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+        />
+        <List
+          todoData={todoData}
+          setTodoData={setTodoData}
+          handleClick={handleClick}
+        />
       </WrapTodo>
     </WrapContainer>
   );

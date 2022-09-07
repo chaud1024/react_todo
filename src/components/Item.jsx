@@ -29,7 +29,8 @@ const BtnDelete = styled.button`
   cursor: pointer;
 `;
 
-const Item = ({ todoData, setTodoData, handleClick, newItem }) => {
+const Item = React.memo(({ todoData, setTodoData, handleClick, newItem }) => {
+  console.log("Item is rendering");
   const getStyled = (completed) => {
     return {
       textDecoration: completed ? "line-through" : "none",
@@ -64,6 +65,6 @@ const Item = ({ todoData, setTodoData, handleClick, newItem }) => {
       ))}
     </>
   );
-};
+});
 
 export default Item;

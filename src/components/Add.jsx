@@ -40,6 +40,7 @@ const InputSubmit = styled.input`
 `;
 
 const Add = ({ value, setValue, handleChange, handleSubmit }) => {
+  console.log("Add is rendering");
   return (
     <WrapForm>
       <Form onSubmit={handleSubmit}>
