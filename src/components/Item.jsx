@@ -38,7 +38,7 @@ const Item = React.memo(({ todoData, setTodoData, handleClick, newItem }) => {
     };
   };
 
-  const handleCompledteChange = (id) => {
+  const handleCompletedChange = (id) => {
     let newTodoData = todoData.map((item) => {
       if (item.id === id) {
         item.completed = !item.completed;
@@ -56,7 +56,7 @@ const Item = React.memo(({ todoData, setTodoData, handleClick, newItem }) => {
             <Checkbox
               type="checkbox"
               defaultChecked={false}
-              onChange={() => handleCompledteChange(item.id)}
+              onChange={() => handleCompletedChange(item.id)}
             />
             {item.title}
           </ItemLabel>

@@ -4,7 +4,7 @@ import List from "./List";
 import Add from "./Add";
 
 const WrapContainer = styled.div`
-  width: 80%;
+  width: 760px;
   padding: 2rem;
   box-sizing: border-box;
   border-radius: 2rem;
@@ -18,12 +18,35 @@ const WrapTodo = styled.div`
   box-sizing: border-box;
 `;
 
+const WrapTitle = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #245572;
+`;
+
 const Title = styled.h1`
   font-size: 2rem;
   color: #245572;
   padding: 1rem 0;
   box-sizing: border-box;
-  border-bottom: 2px solid #245572;
+  width: 84%;
+`;
+
+const BtnAllDelete = styled.button`
+  padding: 0.8rem;
+  box-sizing: border-box;
+  border-radius: 1rem;
+  border: none;
+  background-color: #ff6b71;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: #fff;
+    background-color: #d1385c;
+  }
 `;
 
 const Container = () => {
@@ -57,10 +80,17 @@ const Container = () => {
     setValue("");
   };
 
+  const handleAllDeleteClick = () => {
+    setTodoData([]);
+  };
+
   return (
     <WrapContainer>
       <WrapTodo>
-        <Title>오늘의 할 일</Title>
+        <WrapTitle>
+          <Title>오늘의 할 일</Title>
+          <BtnAllDelete onClick={handleAllDeleteClick}>All Delete</BtnAllDelete>
+        </WrapTitle>
         <Add
           value={value}
           setValue={setValue}
