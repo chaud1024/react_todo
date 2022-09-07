@@ -39,6 +39,16 @@ const BtnEdit = styled.button`
   cursor: pointer;
 `;
 
+const BtnSave = styled.button`
+  color: #fff;
+  background-color: #e07717;
+  border: none;
+  padding: 6px 9px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  cursor: pointer;
+`;
+
 const BtnDelete = styled.button`
   background-color: #245572;
   color: #fff;
@@ -100,9 +110,9 @@ const Item = React.memo(
               />
             </ItemLabel>
           </WrapEditForm>
-          <BtnEdit type="submit" onClick={handleEditSubmit}>
+          <BtnSave type="submit" onClick={handleEditSubmit}>
             SAVE
-          </BtnEdit>
+          </BtnSave>
           <BtnDelete onClick={() => setIsEditing(false)}>X</BtnDelete>
         </WrapItem>
       );
