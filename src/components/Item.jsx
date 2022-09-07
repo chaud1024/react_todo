@@ -36,17 +36,25 @@ const BtnEdit = styled.button`
   border: none;
   padding: 6px 9px;
   box-sizing: border-box;
+  border-radius: 8px;
   cursor: pointer;
+  &:hover {
+    background-color: #245572;
+    color: #fff;
+  }
 `;
 
 const BtnSave = styled.button`
   color: #fff;
-  background-color: #e07717;
+  background-color: #ed7f18;
   border: none;
   padding: 6px 9px;
   box-sizing: border-box;
   border-radius: 8px;
   cursor: pointer;
+  &:hover {
+    background-color: #ed5b18;
+  }
 `;
 
 const BtnDelete = styled.button`
