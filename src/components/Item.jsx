@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 const WrapItem = styled.div`
@@ -19,6 +19,15 @@ const Checkbox = styled.input`
   margin-right: 6px;
 `;
 
+const BtnEdit = styled.button`
+  color: #245572;
+  background-color: transparent;
+  border: none;
+  padding: 6px 9px;
+  box-sizing: border-box;
+  cursor: pointer;
+`;
+
 const BtnDelete = styled.button`
   background-color: #245572;
   color: #fff;
@@ -29,42 +38,79 @@ const BtnDelete = styled.button`
   cursor: pointer;
 `;
 
-const Item = React.memo(({ todoData, setTodoData, handleClick, newItem }) => {
-  console.log("Item is rendering");
-  const getStyled = (completed) => {
-    return {
-      textDecoration: completed ? "line-through" : "none",
-      color: completed ? "#89acbe" : "#0c1214",
+const Item = React.memo(
+  ({ todoData, setTodoData, handleClick, id, title, completed }) => {
+    const getStyled = (completed) => {
+      return {
+        textDecoration: completed ? "line-through" : "none",
+        color: completed ? "#89acbe" : "#0c1214",
+      };
     };
-  };
 
-  const handleCompletedChange = (id) => {
-    let newTodoData = todoData.map((item) => {
-      if (item.id === id) {
-        item.completed = !item.completed;
-      }
-      return item;
-    });
-    setTodoData(newTodoData);
-  };
+    const handleCompletedChange = (id) => {
+      let newTodoData = todoData.map((item) => {
+        if (item.id === id) {
+          item.completed = !item.completed;
+        }
+        return item;
+      });
+      setTodoData(newTodoData);
+    };
 
-  return (
-    <>
-      {todoData.map((item) => (
-        <WrapItem key={item.id}>
-          <ItemLabel style={getStyled(item.completed)} key={item.id}>
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedTitle, setEditedTitle] = useState(title);
+
+    const hadleEditChange = (e) => {
+      setEditedTitle(e.target.value);
+    };
+
+    const handleEditSubmit = (e) => {
+      e.preventDefault();
+      let newTodoData = todoData.map((item) => {
+        if (item.id === id) {
+          item.title = editedTitle;
+        }
+        return item;
+      });
+      setTodoData(newTodoData);
+      setIsEditing(false);
+    };
+
+    if (isEditing) {
+      return (
+        <WrapItem key={id}>
+          <form onSubmit={handleEditSubmit}>
+            <ItemLabel>
+              <Checkbox
+                type="text"
+                value={editedTitle}
+                onChange={hadleEditChange}
+              />
+            </ItemLabel>
+          </form>
+          <BtnEdit type="submit" onClick={handleEditSubmit}>
+            SAVE
+          </BtnEdit>
+          <BtnDelete onClick={() => setIsEditing(false)}>X</BtnDelete>
+        </WrapItem>
+      );
+    } else {
+      return (
+        <WrapItem key={id}>
+          <ItemLabel style={getStyled(completed)} key={id}>
             <Checkbox
               type="checkbox"
               defaultChecked={false}
-              onChange={() => handleCompletedChange(item.id)}
+              onChange={() => handleCompletedChange(id)}
             />
-            {item.title}
+            {title}
           </ItemLabel>
-          <BtnDelete onClick={() => handleClick(item.id)}>X</BtnDelete>
+          <BtnEdit onClick={() => setIsEditing(true)}>EDIT</BtnEdit>
+          <BtnDelete onClick={() => handleClick(id)}>X</BtnDelete>
         </WrapItem>
-      ))}
-    </>
-  );
-});
+      );
+    }
+  }
+);
 
 export default Item;

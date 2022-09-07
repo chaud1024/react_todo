@@ -10,15 +10,18 @@ const WrapList = styled.div`
 `;
 
 const List = React.memo(({ todoData, setTodoData, handleClick }) => {
-  console.log("List is rendering");
-
   return (
     <WrapList>
-      <Item
-        todoData={todoData}
-        setTodoData={setTodoData}
-        handleClick={handleClick}
-      />
+      {todoData.map((item) => (
+        <Item
+          todoData={todoData}
+          setTodoData={setTodoData}
+          handleClick={handleClick}
+          id={item.id}
+          title={item.title}
+          completed={item.completed}
+        />
+      ))}
     </WrapList>
   );
 });
