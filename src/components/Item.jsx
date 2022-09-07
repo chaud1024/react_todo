@@ -19,6 +19,17 @@ const Checkbox = styled.input`
   margin-right: 6px;
 `;
 
+const EditInput = styled.input`
+  margin-right: 6px;
+  width: 96%;
+  padding: 0.8rem;
+  border: none;
+`;
+
+const WrapEditForm = styled.form`
+  width: 70%;
+`;
+
 const BtnEdit = styled.button`
   color: #245572;
   background-color: transparent;
@@ -79,15 +90,16 @@ const Item = React.memo(
     if (isEditing) {
       return (
         <WrapItem key={id}>
-          <form onSubmit={handleEditSubmit}>
+          <WrapEditForm onSubmit={handleEditSubmit}>
             <ItemLabel>
-              <Checkbox
+              <EditInput
                 type="text"
                 value={editedTitle}
                 onChange={hadleEditChange}
+                autoFocus
               />
             </ItemLabel>
-          </form>
+          </WrapEditForm>
           <BtnEdit type="submit" onClick={handleEditSubmit}>
             SAVE
           </BtnEdit>
